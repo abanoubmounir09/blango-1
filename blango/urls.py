@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import path,include
 from blog.views import index,post_detail,get_ip
+from blango_auth.views import profile
 import debug_toolbar
 
 
@@ -25,7 +26,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("",index),
     path("post-detail/<str:slug>",post_detail,name="post_detail"),
-    path("ip/",get_ip)
+    path("ip/",get_ip),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("accounts/profile/",profile,name="profile"),
 ]
 if settings.DEBUG:
     urlpatterns += [

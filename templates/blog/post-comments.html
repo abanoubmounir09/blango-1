@@ -2,6 +2,7 @@
 {% load blog_extras crispy_forms_tags %}
 
 <h4>Comments</h4>
+{%if comments %}
 {% for comment in post.comments.all %}
 
 <div class="row border-top pt-2">
@@ -9,28 +10,35 @@
         <h5>Posted by {{ comment.creator }} at {{ comment.created_at|date:"M, d Y h:i" }}</h5>
     </div>
 </div> 
-
 <div class="row border-bottom">
     <div class="col">
         <p>{{ comment.content }}</p>
     </div>
 </div> 
+{% endfor %}
+{%else%}
 <div class="row border-top border-bottom">
     <div class="col">
             <p>No comments.</p>
     </div>
 </div>
-{% endfor %}
+{% endif%}
+
 
 {% if request.user.is_active %}
 <div class="row mt-4">
     <div class="col">
-            <h2>Add Comment</h2>       
+            <h2>Add Comment</h2>  
+            <form method="post" action="{% url "login" %}">
+            {% csrf_token %}
+            {{ comment_form|crispy }}
+            <button type="submit" class="btn btn-primary">Log In</button>
+            <input type="hidden" name="next" value="{{ next }}">
+            </form>     
     </div>
 </div>
         
 {% endif %}
-
 
 
 
