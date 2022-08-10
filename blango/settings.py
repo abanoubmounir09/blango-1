@@ -51,10 +51,12 @@ class Dev(Configuration):
         'django.contrib.staticfiles',
         'blog',
         'crispy_forms',
-        'crispy_bootstrap5'
+        'crispy_bootstrap5',
+        "debug_toolbar",
     ]
 
     MIDDLEWARE = [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
         'django.middleware.security.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
@@ -85,6 +87,10 @@ class Dev(Configuration):
     ]
 
     WSGI_APPLICATION = 'blango.wsgi.application'
+    #INTERNAL_IPS setting, which is the list of IP address that 
+    #are allowed to use DjDT. This will be the IP address you got 
+    #from your get_ip view.
+    INTERNAL_IPS = ["192.168.10.226","127.0.0.1","192.168.11.179"]
 
 
     # Database
