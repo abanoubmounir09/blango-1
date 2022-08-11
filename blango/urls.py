@@ -19,8 +19,8 @@ from django.urls import path,include
 from blog.views import index,post_detail,get_ip
 from blango_auth.views import profile
 import debug_toolbar
-
-
+from blango_auth.forms import BlangoRegistrationForm
+from django_registration.backends.one_step.views import RegistrationView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +29,7 @@ urlpatterns = [
     path("ip/",get_ip),
     path("accounts/", include("django.contrib.auth.urls")),
     path("accounts/profile/",profile,name="profile"),
+    path("accounts/register/",RegistrationView.as_view(form_class=BlangoRegistrationForm),name="django_registration_register"),
 ]
 if settings.DEBUG:
     urlpatterns += [
