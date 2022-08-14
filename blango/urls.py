@@ -27,9 +27,11 @@ urlpatterns = [
     path("",index),
     path("post-detail/<str:slug>",post_detail,name="post_detail"),
     path("ip/",get_ip),
-    path("accounts/", include("django.contrib.auth.urls")),
+    #path("accounts/", include("django.contrib.auth.urls")),
     path("accounts/profile/",profile,name="profile"),
+    path("accounts/login/",profile,name="login"),
     path("accounts/register/",RegistrationView.as_view(form_class=BlangoRegistrationForm),name="django_registration_register"),
+    path("accounts/", include("django_registration.backends.activation.urls")),
 ]
 if settings.DEBUG:
     urlpatterns += [
