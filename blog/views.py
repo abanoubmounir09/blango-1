@@ -47,3 +47,25 @@ def post_detail(request, slug):
 def get_ip(request):
   from django.http import HttpResponse
   return HttpResponse(request.META['REMOTE_ADDR'])
+
+
+
+
+def post_to_dict(post):
+    return {
+        "pk": post.pk,
+        "author_id": post.author_id,
+        "created_at": post.created_at,
+        "modified_at": post.modified_at,
+        "published_at": post.published_at,
+        "title": post.title,
+        "slug": post.slug,
+        "summary": post.summary,
+        "content": post.content,
+    }
+
+
+def post_list(request):
+    posts = Post.objects.all()
+    posts_as_dict = [post_to_dict(p) for p in posts]
+    return JsonResponse({"data": posts_as_dict})
