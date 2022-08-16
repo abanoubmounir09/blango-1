@@ -1,7 +1,7 @@
 
 
 from rest_framework import serializers
-from blog.modles import Post
+from blog.models import Post
 
 
 
