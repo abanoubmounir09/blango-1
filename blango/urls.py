@@ -21,6 +21,7 @@ from blango_auth.views import profile
 import debug_toolbar
 from blango_auth.forms import BlangoRegistrationForm
 from django_registration.backends.one_step.views import RegistrationView
+from rest_framework.authtoken import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,6 +38,9 @@ urlpatterns = [
 urlpatterns += [
     path("api/v1/", include("blog.api_urls")),
 ]
+
+
+
 if settings.DEBUG:
     urlpatterns += [
         path("__debug__/", include(debug_toolbar.urls)),
